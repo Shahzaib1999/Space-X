@@ -1,9 +1,9 @@
 import gql from "graphql-tag";
 
-const LAUNCHES_QUERY = gql`
+export const LAUNCHES_QUERY = gql`
   query Launches {
     launches {
-      id
+      flight_number
       mission_name
       launch_year
     }
