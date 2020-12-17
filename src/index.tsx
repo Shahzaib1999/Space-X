@@ -4,18 +4,21 @@ import {ApolloProvider,ApolloClient, InMemoryCache} from '@apollo/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from './serviceWorker';
+import swDev from './serviceWorker';
 
 const client = new ApolloClient({
   uri: 'https://spacexdata.herokuapp.com/graphql',
   cache: new InMemoryCache()
 })
 
+console.log(';;;;llllllll',client);
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    {/* <ApolloProvider client={client}> */}
       <App />
-    </ApolloProvider>
+    {/* </ApolloProvider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -24,4 +27,5 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-serviceWorker.register();
+// serviceWorker.register()
+swDev();

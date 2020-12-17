@@ -7,45 +7,41 @@ import { LaunchList } from "./components/LaunchList/LaunchList";
 import { LaunchInfo } from "./components/LaunchInfo/LaunchInfo";
 import getApolloClient from "./apolloClient";
 import { ApolloProvider } from "@apollo/client";
-import Ap from "./ap";
 
-function App() {
+function Ap() {
   const [id, setId] = useState(42);
   const handleIdChange = useCallback((newId) => {
     setId(newId);
   }, []);
 
-  const [client, setClient] = useState(null)
-  const [loading, setLoading] = useState(true)
+//   const [client, setClient] = useState(null)
+//   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    getApolloClient().then((client) => {
-      setClient(client as any)
-      setLoading(false)
-      console.log(client);
+//   useEffect(() => {
+//     getApolloClient().then((client) => {
+//       setClient(client as any)
+//       setLoading(false)
+//       console.log(client);
       
-    })
-  }, [])
+//     })
+//   }, [])
 
-  if (loading || !client) {
-    return (
-      <div >
-        <h1>Loading...</h1>
-      </div>
-    )
-  }
+//   if (loading || !client) {
+//     return (
+//       <div >
+//         <h1>Loading...</h1>
+//       </div>
+//     )
+//   }
 
   return (
-    <ApolloProvider client={client as any}>
     <div className="App">
-      <Ap />
-      {/* <LaunchListContainer handleIdChange={handleIdChange} />
-      <LaunchInfoContainer id={id} /> */}
+      <LaunchListContainer handleIdChange={handleIdChange} />
+      <LaunchInfoContainer id={id} />
       {/* <LaunchList handleIdChange={handleIdChange} />
       <LaunchInfo id={id} /> */}
     </div>
-    </ApolloProvider>
   );
 }
 
-export default App;
+export default Ap;
