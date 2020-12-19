@@ -6,6 +6,9 @@ export const LAUNCHES_QUERY = gql`
       flight_number
       mission_name
       launch_year
+      links {
+        flickr_images
+      }
     }
   }
 `;

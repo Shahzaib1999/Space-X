@@ -1,4 +1,4 @@
-.LaunchList {
+/* .LaunchList {
   height: 100vh;
   overflow: hidden auto;
   background-color: #ececec;
@@ -18,4 +18,13 @@
   padding-bottom: 20px;
   border-top: 1px solid #919191;
   cursor: pointer;
+} */
+
+.launch-card{
+  background-color: #0F162B !important;
+}
+
+.launch-image{
+  width: 100%;
+  height: 200px;
 }

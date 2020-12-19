@@ -6,45 +6,99 @@ import { LaunchInfoContainer } from "./components/LaunchInfo/LaunchProfileContai
 import { LaunchList } from "./components/LaunchList/LaunchList";
 import { LaunchInfo } from "./components/LaunchInfo/LaunchInfo";
 import getApolloClient from "./apolloClient";
-import { ApolloProvider } from "@apollo/client";
+import {
+  ApolloProvider,
+  InMemoryCache,
+  ApolloClient,
+  NormalizedCacheObject,
+} from "@apollo/client";
+import { offsetLimitPagination } from "@apollo/client/utilities";
+import { persistCache } from "apollo-cache-persist";
+import { PersistentStorage, PersistedData } from "apollo-cache-persist/types";
+
+import { BrowserRouter as Router,Switch, Route } from "react-router-dom";
+
 import Ap from "./ap";
 
 function App() {
-  const [id, setId] = useState(42);
-  const handleIdChange = useCallback((newId) => {
-    setId(newId);
-  }, []);
+  // const [id, setId] = useState(42);
+  // const handleIdChange = useCallback((newId) => {
+  //   setId(newId);
+  // }, []);
 
-  const [client, setClient] = useState(null)
-  const [loading, setLoading] = useState(true)
+  // const [client, setClient] = useState(null)
+  // const [loading, setLoading] = useState(true)
+
+  // useEffect(() => {
+  //   getApolloClient().then((client) => {
+  //     setClient(client as any)
+  //     setLoading(false)
+  //     console.log(client);
+
+  //   })
+  // }, [])
+
+  // if (loading || !client) {
+  //   return (
+  //     <div >
+  //       <h1>Loading...</h1>
+  //     </div>
+  //   )
+  // }
+
+  const [client, setClient] = useState<any>();
 
   useEffect(() => {
-    getApolloClient().then((client) => {
-      setClient(client as any)
-      setLoading(false)
-      console.log(client);
-      
-    })
-  }, [])
+    const cache: any = new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            launches: offsetLimitPagination(),
+            histories: offsetLimitPagination(),
+          },
+        },
+      },
+    });
 
-  if (loading || !client) {
-    return (
-      <div >
-        <h1>Loading...</h1>
-      </div>
-    )
+    const client = new ApolloClient({
+      uri: "https://spacexdata.herokuapp.com/graphql",
+      cache,
+    });
+
+    persistCache({
+      cache,
+      storage: window.localStorage as PersistentStorage<
+        PersistedData<NormalizedCacheObject>
+      >,
+    }).then(() => {
+      setClient(client);
+    });
+  }, []);
+  if (client === undefined) {
+    return <h1>loading</h1>;
   }
 
   return (
-    <ApolloProvider client={client as any}>
-    <div className="App">
-      <Ap />
-      {/* <LaunchListContainer handleIdChange={handleIdChange} />
+    <Router>
+      <Switch>
+    <ApolloProvider client={client}>
+      {/* <h1>Space-X</h1> */}
+      <div className="App">
+        {/* <Routes> */}
+        {/* <Route path="/" element={<LaunchListContainer />}></Route> */}
+        <Route exact path="/">
+        <Ap />
+
+        </Route>
+        
+        {/* <LaunchListContainer handleIdChange={handleIdChange} />
       <LaunchInfoContainer id={id} /> */}
-      {/* <LaunchList handleIdChange={handleIdChange} />
+        {/* <LaunchList handleIdChange={handleIdChange} />
       <LaunchInfo id={id} /> */}
-    </div>
+      </div>
     </ApolloProvider>
+    </Switch>
+    </Router>
   );
 }
 
