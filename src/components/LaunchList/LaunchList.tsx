@@ -26,13 +26,19 @@ export const LaunchList: FC<Props> = ({ data, handleIdChange }) => {
                   <CardHeader className="p-0">
                     {!!launch?.links &&
                     !!launch.links.flickr_images &&
-                    launch?.links.flickr_images[0] ? (
+                    launch?.links.flickr_images[0] ? navigator.onLine ?  
                       <img
-                        src={launch?.links.flickr_images[0] ? launch?.links.flickr_images[0] : Logo}
+                        src={launch?.links.flickr_images[0] && launch?.links.flickr_images[0]}
                         alt="img"
                         className="launch-image"
                       />
-                    ) : null}
+                      : 
+                      <img
+                      src={Logo}
+                      alt="img"
+                      className="launch-image"
+                    />
+                     : null }
                     {/* <img src={launch?.links} alt=""/>
               {launch?.mission_name} */}
                   </CardHeader>
