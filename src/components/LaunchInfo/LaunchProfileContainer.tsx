@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import { useLaunchInfoQuery } from "../../generated/graphql";
+import { Loader } from "../Loader/Loader";
 import { LaunchInfo } from "./LaunchInfo";
 
-interface OwnProps {
-  id: number;
+interface ParamTypes {
+  id: string;
 }
 
-export const LaunchInfoContainer = ({ id }: OwnProps) => {
-  console.log('id',id);
-  
+export const LaunchInfoContainer = () => {
+  const { id } = useParams<ParamTypes>();
   const { data, error, loading,refetch } = useLaunchInfoQuery({
     variables: { id: String(id) },
   });
@@ -19,7 +20,7 @@ export const LaunchInfoContainer = ({ id }: OwnProps) => {
   }, [id]);
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   if (error) {

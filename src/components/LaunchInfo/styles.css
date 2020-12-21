@@ -1,4 +1,4 @@
-.LaunchProfile {
+/* .LaunchProfile {
   height: 100vh;
   max-height: 100%;
   width: calc(100vw - 300px);
@@ -24,6 +24,17 @@
   color: #ff695e;
 }
 
+.LaunchProfile__image-list {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 40px;
+  padding-bottom: 100px;
+}
+
+.LaunchProfile__image {
+  width: 100%;
+} */
 .LaunchProfile__image-list {
   display: grid;
   grid-gap: 20px;

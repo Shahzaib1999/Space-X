@@ -16,9 +16,11 @@ import { offsetLimitPagination } from "@apollo/client/utilities";
 import { persistCache } from "apollo-cache-persist";
 import { PersistentStorage, PersistedData } from "apollo-cache-persist/types";
 
-import { BrowserRouter as Router,Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import Logo from './assets/logo.png';
 import Ap from "./ap";
+import { Loader } from "./components/Loader/Loader";
 
 function App() {
   // const [id, setId] = useState(42);
@@ -75,29 +77,33 @@ function App() {
     });
   }, []);
   if (client === undefined) {
-    return <h1>loading</h1>;
+    return <Loader />;
   }
 
   return (
     <Router>
       <Switch>
-    <ApolloProvider client={client}>
-      {/* <h1>Space-X</h1> */}
-      <div className="App">
-        {/* <Routes> */}
-        {/* <Route path="/" element={<LaunchListContainer />}></Route> */}
-        <Route exact path="/">
-        <Ap />
+        <ApolloProvider client={client}>
+          {/* <h1>Space-X</h1> */}
+          <div className="App">
+          <img src={Logo} alt="logo" width={600} />
+            {/* <Routes> */}
+            {/* <Route path="/" element={<LaunchListContainer />}></Route> */}
 
-        </Route>
-        
-        {/* <LaunchListContainer handleIdChange={handleIdChange} />
+            <Route exact path="/">
+              <LaunchListContainer />
+            </Route>
+            <Route exact path="/launch/:id">
+              <LaunchInfoContainer />
+            </Route>
+
+            {/* <LaunchListContainer handleIdChange={handleIdChange} />
       <LaunchInfoContainer id={id} /> */}
-        {/* <LaunchList handleIdChange={handleIdChange} />
+            {/* <LaunchList handleIdChange={handleIdChange} />
       <LaunchInfo id={id} /> */}
-      </div>
-    </ApolloProvider>
-    </Switch>
+          </div>
+        </ApolloProvider>
+      </Switch>
     </Router>
   );
 }

@@ -1,19 +1,20 @@
 import React from "react";
 
 import { LaunchesQuery, useLaunchesQuery } from "../../generated/graphql";
-import { LaunchList, OwnProps } from "./LaunchList";
+import { Loader } from "../Loader/Loader";
+import { LaunchList } from "./LaunchList";
 
-export const LaunchListContainer = (props: OwnProps) => {
+export const LaunchListContainer = () => {
   const { data, error, loading } = useLaunchesQuery();
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   if (error || !data) {
     return <h3>Error</h3>;
   }
   console.log(data);
-  
-  return <LaunchList data={data} {...props} />;
+
+  return <LaunchList data={data} />;
 };

@@ -1,19 +1,15 @@
 import React, { FC } from "react";
 import { Container, Row, Col, Card, CardHeader, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import { LaunchesQuery } from "../../generated/graphql";
 import "./styles.css";
 import Logo from '../../assets/logo.png';
-
-export interface OwnProps {
-  handleIdChange: (newId: number) => void;
-}
-
-interface Props extends OwnProps {
+interface Props {
   data: LaunchesQuery;
 }
 
-export const LaunchList: FC<Props> = ({ data, handleIdChange }) => {
+export const LaunchList: FC<Props> = ({ data }) => {
   return (
     <Container>
       <Row>
@@ -22,6 +18,7 @@ export const LaunchList: FC<Props> = ({ data, handleIdChange }) => {
             .filter((launch) => launch?.links?.flickr_images?.length)
             .map((launch, ind) => (
               <Col md={4} key={ind}>
+                <Link to={`/launch/${launch?.flight_number}`}>
                 <Card className="launch-card mt-3">
                   <CardHeader className="p-0">
                     {!!launch?.links &&
@@ -46,6 +43,7 @@ export const LaunchList: FC<Props> = ({ data, handleIdChange }) => {
                     {launch?.mission_name}
                   </CardBody>
                 </Card>
+                </Link>
               </Col>
             ))}
       </Row>
