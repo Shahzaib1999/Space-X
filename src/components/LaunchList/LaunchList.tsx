@@ -17,7 +17,7 @@ export const LaunchList: FC<Props> = ({ data }) => {
           data.launches
             .filter((launch) => launch?.links?.flickr_images?.length)
             .map((launch, ind) => (
-              <Col md={4} key={ind}>
+              <Col md={6} lg={4} key={ind}>
                 <Link to={`/launch/${launch?.flight_number}`}>
                 <Card className="launch-card mt-3">
                   <CardHeader className="p-0">
@@ -36,8 +36,6 @@ export const LaunchList: FC<Props> = ({ data }) => {
                       className="launch-image"
                     />
                      : null }
-                    {/* <img src={launch?.links} alt=""/>
-              {launch?.mission_name} */}
                   </CardHeader>
                   <CardBody className="text-white h3 text-center">
                     {launch?.mission_name}
@@ -48,17 +46,5 @@ export const LaunchList: FC<Props> = ({ data }) => {
             ))}
       </Row>
     </Container>
-    // <ol className={`LaunchList`}>
-    //   {!!data.launches &&
-    //     data.launches.map((launch, ind) => (
-    //       <li
-    //         key={ind}
-    //         className={`LaunchList__item`}
-    //         onClick={() => handleIdChange(launch?.flight_number!)}
-    //       >
-    //         {launch?.mission_name} - {launch?.launch_year}
-    //       </li>
-    //     ))}
-    // </ol>
   );
 };

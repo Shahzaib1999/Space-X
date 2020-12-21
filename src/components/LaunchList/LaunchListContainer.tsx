@@ -14,7 +14,6 @@ export const LaunchListContainer = () => {
   if (error || !data) {
     return <h3>Error</h3>;
   }
-  console.log(data);
 
   return <LaunchList data={data} />;
 };

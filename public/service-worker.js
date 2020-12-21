@@ -2,19 +2,18 @@ let version = "v1";
 
 //Cache Files
 let cacheFiles = [
-  "/static/js/2.6b531299.chunk.js",
-  "/static/js/3.275bb9cd.chunk.js",
-  "/static/js/main.63ab0d0b.chunk.js",
-  "/static/js/runtime-main.4146be26.js",
-  "/static/css/main.8dafb259.chunk.css",
-  // "/static/css/main.c6446536.chunk.css",
+  "/static/js/2.b10a8057.chunk.js",
+  "/static/js/3.8bc106b0.chunk.js",
+  "/static/js/main.1e4e846d.chunk.js",
+  "/static/js/runtime-main.1c2e87ec.js",
+  "/static/css/2.1a02f21c.chunk.css",
+  "/static/css/main.8ed7caa2.chunk.css",
+  "/static/media/loader.e2ef5a7f.png",
   "/static/media/logo.754a683c.png",
   "/favicon.ico",
   "/logo192.png",
   "/",
-  "/index.html",
-  // "https://spacexdata.herokuapp.com/graphql"
-  // "https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple"
+  "/index.html"
 ];
 
 // Install Service Woker
@@ -22,7 +21,6 @@ self.addEventListener("install", (e) => {
   self.skipWaiting();
   e.waitUntil(
     caches.open(version).then((cache) => {
-      console.log("cacheFiles", cacheFiles);
       return cache.addAll(cacheFiles);
     })
   );
@@ -46,7 +44,6 @@ self.addEventListener("fetch", (event) => {
         .match(event.request, options)
         .then((response) => {
           if (response) {
-            console.log(response);
             return response || fetch.response;
           }
         })

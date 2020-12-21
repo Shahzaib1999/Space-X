@@ -30,7 +30,6 @@ export const LaunchInfoContainer = () => {
   if (!data) {
     return <h3>Select a flight</h3>;
   }
-  console.log(data);
 
   return <LaunchInfo data={data} />;
 };

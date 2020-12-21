@@ -3,9 +3,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import { LaunchListContainer } from "./components/LaunchList/LaunchListContainer";
 import { LaunchInfoContainer } from "./components/LaunchInfo/LaunchProfileContainer";
-import { LaunchList } from "./components/LaunchList/LaunchList";
-import { LaunchInfo } from "./components/LaunchInfo/LaunchInfo";
-import getApolloClient from "./apolloClient";
 import {
   ApolloProvider,
   InMemoryCache,
@@ -15,39 +12,12 @@ import {
 import { offsetLimitPagination } from "@apollo/client/utilities";
 import { persistCache } from "apollo-cache-persist";
 import { PersistentStorage, PersistedData } from "apollo-cache-persist/types";
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Logo from './assets/logo.png';
-import Ap from "./ap";
 import { Loader } from "./components/Loader/Loader";
 
 function App() {
-  // const [id, setId] = useState(42);
-  // const handleIdChange = useCallback((newId) => {
-  //   setId(newId);
-  // }, []);
-
-  // const [client, setClient] = useState(null)
-  // const [loading, setLoading] = useState(true)
-
-  // useEffect(() => {
-  //   getApolloClient().then((client) => {
-  //     setClient(client as any)
-  //     setLoading(false)
-  //     console.log(client);
-
-  //   })
-  // }, [])
-
-  // if (loading || !client) {
-  //   return (
-  //     <div >
-  //       <h1>Loading...</h1>
-  //     </div>
-  //   )
-  // }
-
   const [client, setClient] = useState<any>();
 
   useEffect(() => {
@@ -84,23 +54,14 @@ function App() {
     <Router>
       <Switch>
         <ApolloProvider client={client}>
-          {/* <h1>Space-X</h1> */}
           <div className="App">
-          <img src={Logo} alt="logo" width={600} />
-            {/* <Routes> */}
-            {/* <Route path="/" element={<LaunchListContainer />}></Route> */}
-
+          <img src={Logo} alt="logo" className="logo" />
             <Route exact path="/">
               <LaunchListContainer />
             </Route>
             <Route exact path="/launch/:id">
               <LaunchInfoContainer />
             </Route>
-
-            {/* <LaunchListContainer handleIdChange={handleIdChange} />
-      <LaunchInfoContainer id={id} /> */}
-            {/* <LaunchList handleIdChange={handleIdChange} />
-      <LaunchInfo id={id} /> */}
           </div>
         </ApolloProvider>
       </Switch>

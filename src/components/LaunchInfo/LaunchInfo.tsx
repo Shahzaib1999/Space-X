@@ -33,11 +33,10 @@ export const LaunchInfo: FC<Props> = ({ data }) => {
         <Row>
           {data.launch.links.flickr_images.map((image) =>
             image ? (
-              <Col md={6}>
+              <Col md={6} key={image}>
                 <img
                   src={image}
                   className="LaunchProfile__image mt-3"
-                  key={image}
                   alt="img"
                   width={300}
                 />
