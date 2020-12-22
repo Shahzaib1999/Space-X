@@ -8,7 +8,7 @@ let cacheFiles = [
   "/static/js/runtime-main.1c2e87ec.js",
   "/static/css/2.1a02f21c.chunk.css",
   "/static/css/main.8ed7caa2.chunk.css",
-  "/static/media/loader.e2ef5a7f.png",
+  "/static/media/loader.e2ef5a7f.gif",
   "/static/media/logo.754a683c.png",
   "/favicon.ico",
   "/logo192.png",

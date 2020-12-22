@@ -18,42 +18,42 @@ import Logo from './assets/logo.png';
 import { Loader } from "./components/Loader/Loader";
 
 function App() {
-  const [client, setClient] = useState<any>();
+  // const [client, setClient] = useState<any>();
 
-  useEffect(() => {
-    const cache: any = new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            launches: offsetLimitPagination(),
-            histories: offsetLimitPagination(),
-          },
-        },
-      },
-    });
+  // useEffect(() => {
+  //   const cache: any = new InMemoryCache({
+  //     typePolicies: {
+  //       Query: {
+  //         fields: {
+  //           launches: offsetLimitPagination(),
+  //           histories: offsetLimitPagination(),
+  //         },
+  //       },
+  //     },
+  //   });
 
-    const client = new ApolloClient({
-      uri: "https://spacexdata.herokuapp.com/graphql",
-      cache,
-    });
+  //   const client = new ApolloClient({
+  //     uri: "https://spacexdata.herokuapp.com/graphql",
+  //     cache,
+  //   });
 
-    persistCache({
-      cache,
-      storage: window.localStorage as PersistentStorage<
-        PersistedData<NormalizedCacheObject>
-      >,
-    }).then(() => {
-      setClient(client);
-    });
-  }, []);
-  if (client === undefined) {
-    return <Loader />;
-  }
+  //   persistCache({
+  //     cache,
+  //     storage: window.localStorage as PersistentStorage<
+  //       PersistedData<NormalizedCacheObject>
+  //     >,
+  //   }).then(() => {
+  //     setClient(client);
+  //   });
+  // }, []);
+  // if (client === undefined) {
+  //   return <Loader />;
+  // }
 
   return (
     <Router>
       <Switch>
-        <ApolloProvider client={client}>
+        {/* <ApolloProvider client={client}> */}
           <div className="App">
           <img src={Logo} alt="logo" className="logo" />
             <Route exact path="/">
@@ -63,7 +63,7 @@ function App() {
               <LaunchInfoContainer />
             </Route>
           </div>
-        </ApolloProvider>
+        {/* </ApolloProvider> */}
       </Switch>
     </Router>
   );
