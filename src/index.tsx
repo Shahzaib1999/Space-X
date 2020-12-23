@@ -7,10 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import * as swDev from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import getApolloClient from './apolloClient';
-// const client = new ApolloClient({
-//   uri: 'https://spacexdata.herokuapp.com/graphql',
-//   cache: new InMemoryCache()
-// })
 
 const client =  getApolloClient().then((client:any) => {
   if (client) {
